@@ -21,8 +21,6 @@ data only; the associated manuscripts are forthcoming.
   `dump_qha.py` exports the per-phase free-energy tables (`qha_*.json`); `fit_eos_qha.py` fits the
   equation of state and emits `eos_params_qha.json`; `qha_benchmark_figure.py` produces the validation
   figure. The exact settings and job sequence are in `reproduce_qha.md`.
-- **`magma/`** — a metal-silicate partitioning model for the oxygen provenance of the core
-  (`oxygen_solver.py`, `continuous_accretion.py`).
 
 ## Reproduce
 
