@@ -1,0 +1,375 @@
+{
+  "_README": "Inner-core ledger with the four solid phases on the QHA own-derived mgd3 EoS (literature kept per block as validation_comparison_literature). Cross-check only; see verify_qha_eos.py. Production stays eos_params.json.",
+  "shared": {
+    "Debye_0_K": 417.0,
+    "Debye_0_source": "Dewaele et al. 2006 PRL 97 215504; theta0 fixed 417 K, reused by Fischer 2014/2011.",
+    "T_0_K": 300.0
+  },
+  "endmembers": {
+    "hcp_Fe": {
+      "structure": "hcp (epsilon-Fe)",
+      "role": "iron base",
+      "V_0": {
+        "value": 6.1278,
+        "unit": "cm3/mol_atom",
+        "source": "QHA campaign (own)"
+      },
+      "K_0": {
+        "value": 313.3,
+        "unit": "GPa",
+        "source": "QHA campaign (own)"
+      },
+      "Kprime_0": {
+        "value": 4.18,
+        "unit": "-",
+        "source": "QHA campaign (own)"
+      },
+      "grueneisen_0": {
+        "value": 1.932,
+        "unit": "-",
+        "source": "QHA (own_derived)"
+      },
+      "q_0": {
+        "value": 1.017,
+        "unit": "-",
+        "source": "QHA (own_derived)"
+      },
+      "Debye_0": {
+        "value": 478.6,
+        "unit": "K",
+        "source": "QHA (own_derived)"
+      },
+      "molar_mass": {
+        "value": 0.055845,
+        "unit": "kg/mol",
+        "n_atoms": 1
+      },
+      "shear": {
+        "G_0": null,
+        "Gprime_0": null,
+        "shear_status": "not_in_EoS_source",
+        "note": "Dewaele 2006 density EoS only; hcp-Fe shear in Mao 2001/Murphy 2013, imported separately in partition_params shear_core."
+      },
+      "validation_comparison_literature": {
+        "V0": {
+          "value": 6.753,
+          "unit": "cm3/mol_atom",
+          "source": "Dewaele 2006, Table III (Vinet)"
+        },
+        "K0": {
+          "value": 163.4,
+          "unit": "GPa",
+          "source": "Dewaele 2006, Table III"
+        },
+        "Kprime_0": {
+          "value": 5.38,
+          "unit": "-",
+          "source": "Dewaele 2006, Table III"
+        },
+        "grueneisen_0": {
+          "value": 1.875,
+          "unit": "-",
+          "source": "Dewaele 2006, Eq.2"
+        },
+        "q_0": {
+          "value": 1.305,
+          "unit": "-",
+          "source": "Dewaele 2006, Eq.2"
+        }
+      }
+    },
+    "B2_FeSi": {
+      "structure": "B2 (CsCl) FeSi",
+      "role": "silicon arm",
+      "V_0": {
+        "value": 12.6326,
+        "unit": "cm3/mol_formula",
+        "source": "QHA campaign (own)"
+      },
+      "K_0": {
+        "value": 250.5,
+        "unit": "GPa",
+        "source": "QHA campaign (own)"
+      },
+      "Kprime_0": {
+        "value": 4.24,
+        "unit": "-",
+        "source": "QHA campaign (own)"
+      },
+      "grueneisen_0": {
+        "value": 2.086,
+        "unit": "-",
+        "source": "QHA (own_derived)"
+      },
+      "q_0": {
+        "value": 1.109,
+        "unit": "-",
+        "source": "QHA (own_derived)"
+      },
+      "Debye_0": {
+        "value": 540.1,
+        "unit": "K",
+        "source": "QHA (own_derived)"
+      },
+      "molar_mass": {
+        "value": 0.0839305,
+        "unit": "kg/mol_formula",
+        "n_atoms": 2
+      },
+      "shear": {
+        "G_0": null,
+        "Gprime_0": null,
+        "shear_status": "not_in_EoS_source",
+        "note": "Fischer 2014 density only; Ono 2013 elasticity imported in shear_core."
+      },
+      "validation_comparison_literature": {
+        "V0": {
+          "value": 12.828,
+          "unit": "cm3/mol_formula",
+          "note": "Fischer 6.414 cm3/mol_atom x2",
+          "source": "Fischer 2014, Table 1"
+        },
+        "K0": {
+          "value": 230.6,
+          "unit": "GPa",
+          "source": "Fischer 2014, Table 1"
+        },
+        "Kprime_0": {
+          "value": 4.17,
+          "unit": "-",
+          "source": "Fischer 2014, Table 1"
+        },
+        "grueneisen_0": {
+          "value": 1.3,
+          "unit": "-",
+          "source": "Fischer 2014, Table 1"
+        },
+        "q_0": {
+          "value": 1.7,
+          "unit": "-",
+          "source": "Fischer 2014, Table 1"
+        }
+      }
+    },
+    "B8_FeO": {
+      "structure": "B8 (NiAs) FeO, metallic",
+      "role": "oxygen arm",
+      "V_0": {
+        "value": 11.997,
+        "unit": "cm3/mol_formula",
+        "source": "Fischer 2011 EPSL, B8"
+      },
+      "K_0": {
+        "value": 137.8,
+        "unit": "GPa",
+        "source": "Fischer 2011 EPSL, B8"
+      },
+      "Kprime_0": {
+        "value": 4.0,
+        "unit": "-",
+        "note": "fixed",
+        "source": "Fischer 2011 EPSL, B8"
+      },
+      "grueneisen_0": {
+        "value": 1.73,
+        "unit": "-",
+        "source": "Fischer 2011 EPSL, B8"
+      },
+      "q_0": {
+        "value": 1.0,
+        "unit": "-",
+        "note": "fixed",
+        "source": "Fischer 2011 EPSL"
+      },
+      "Debye_0": {
+        "value": 417.0,
+        "unit": "K",
+        "source": "shared (Fischer 2011)"
+      },
+      "molar_mass": {
+        "value": 0.0718444,
+        "unit": "kg/mol_formula",
+        "n_atoms": 2
+      },
+      "shear": {
+        "G_0": null,
+        "Gprime_0": null,
+        "shear_status": "not_in_EoS_source"
+      },
+      "FLAG": "B8 FeO V_0 is an ambient extrapolation; metallic inner-core structure."
+    },
+    "B1_FeO": {
+      "structure": "B1 (NaCl) FeO (alternative)",
+      "role": "oxygen arm (stable-phase alt)",
+      "V_0": {
+        "value": 12.5285,
+        "unit": "cm3/mol_formula",
+        "source": "QHA campaign (own)"
+      },
+      "K_0": {
+        "value": 127.4,
+        "unit": "GPa",
+        "source": "QHA campaign (own)"
+      },
+      "Kprime_0": {
+        "value": 3.72,
+        "unit": "-",
+        "source": "QHA campaign (own)"
+      },
+      "grueneisen_0": {
+        "value": 1.53,
+        "unit": "-",
+        "source": "QHA (literature (own fit railed))"
+      },
+      "q_0": {
+        "value": 1.0,
+        "unit": "-",
+        "source": "QHA (literature (own fit railed))"
+      },
+      "Debye_0": {
+        "value": 417.0,
+        "unit": "K",
+        "source": "QHA (literature (own fit railed))"
+      },
+      "molar_mass": {
+        "value": 0.0718444,
+        "unit": "kg/mol_formula",
+        "n_atoms": 2
+      },
+      "shear": {
+        "G_0": null,
+        "Gprime_0": null,
+        "shear_status": "not_in_EoS_source"
+      },
+      "note": "Fischer 2011 concludes B1 stable at core P-T. Select via FEO_PHASE; default B8.",
+      "validation_comparison_literature": {
+        "V0": {
+          "value": 12.256,
+          "unit": "cm3/mol_formula",
+          "source": "Fischer 2011 EPSL (McCammon & Liu 1984)"
+        },
+        "K0": {
+          "value": 149.4,
+          "unit": "GPa",
+          "source": "Fischer 2011 EPSL, B1"
+        },
+        "Kprime_0": {
+          "value": 3.6,
+          "unit": "-",
+          "source": "Fischer 2011 EPSL, B1"
+        },
+        "grueneisen_0": {
+          "value": 1.41,
+          "unit": "-",
+          "source": "Fischer 2011 EPSL, B1"
+        },
+        "q_0": {
+          "value": 0.5,
+          "unit": "-",
+          "note": "fixed",
+          "source": "Fischer 2011 EPSL"
+        }
+      }
+    },
+    "Fe7C3": {
+      "structure": "Fe7C3 iron carbide (nonmagnetic 300 K isotherm)",
+      "role": "carbon arm",
+      "V_0": {
+        "value": 54.3826,
+        "unit": "cm3/mol_formula",
+        "source": "QHA campaign (own)"
+      },
+      "K_0": {
+        "value": 235.5,
+        "unit": "GPa",
+        "source": "QHA campaign (own)"
+      },
+      "Kprime_0": {
+        "value": 4.8,
+        "unit": "-",
+        "source": "QHA campaign (own)"
+      },
+      "grueneisen_0": {
+        "value": 1.62,
+        "unit": "-",
+        "source": "QHA (own_derived)"
+      },
+      "q_0": {
+        "value": 0.51,
+        "unit": "-",
+        "source": "QHA (own_derived)"
+      },
+      "Debye_0": {
+        "value": 557.1,
+        "unit": "K",
+        "source": "QHA (own_derived)"
+      },
+      "molar_mass": {
+        "value": 0.426945,
+        "unit": "kg/mol_formula",
+        "n_atoms": 10
+      },
+      "shear": {
+        "G_0": 60.0,
+        "Gprime_0": 1.0,
+        "shear_status": "calibrated_to_velocity_literature",
+        "note": "Calibrated so mgd3 reproduces low-spin v_s ~4.0 km/s at ICB; NOT an independent modulus.",
+        "source": "Prescher et al. 2015 ngeo2370; Chen et al. 2014 PNAS 111 17755"
+      },
+      "FLAG": "Thermal MGD params calibrated to ~30 GPa, extrapolated ~10x to ICB. Highest-uncertainty phase.",
+      "validation_comparison_literature": {
+        "V0": {
+          "value": 53.0,
+          "unit": "cm3/mol_formula",
+          "note": "8.8 Ang^3/atom (nonmagnetic BM3) x10 x0.60221; rho0 ~8.06 g/cc",
+          "source": "Mookherjee/Nakajima 2011 JGR 116 B04201 (nonmagnetic BM3)"
+        },
+        "K0": {
+          "value": 291.0,
+          "unit": "GPa",
+          "source": "Mookherjee/Nakajima 2011"
+        },
+        "Kprime_0": {
+          "value": 4.5,
+          "unit": "-",
+          "source": "Mookherjee/Nakajima 2011"
+        },
+        "grueneisen_0": {
+          "value": 2.57,
+          "unit": "-",
+          "source": "Mookherjee/Nakajima 2011 MGD"
+        },
+        "q_0": {
+          "value": 2.2,
+          "unit": "-",
+          "source": "Mookherjee/Nakajima 2011 MGD"
+        }
+      }
+    }
+  },
+  "mass_balance": {
+    "_README": "All C -> Fe7C3 (3C+7Fe); all Si -> FeSi; all O -> FeO; rest Fe -> hcp.",
+    "n_hcp_fe": "1 - (10/3)*X_C - 2*X_Si - 2*X_O",
+    "n_Fe7C3": "X_C / 3",
+    "n_FeSi": "X_Si",
+    "n_FeO": "X_O",
+    "physical_constraint": "n_hcp_fe >= 0 (else oversaturated; skipped)"
+  },
+  "validation_targets_PREM": {
+    "source": "Dziewonski & Anderson 1981 PEPI 25 297",
+    "ICB": {
+      "radius_km": 1221.5,
+      "P_GPa": 328.85,
+      "density_g_cm3": 12.7636,
+      "Vphi_km_s": 10.259,
+      "Vp_km_s": 11.028,
+      "Vs_km_s": 3.504
+    },
+    "center": {
+      "radius_km": 0.0,
+      "P_GPa": 363.85,
+      "density_g_cm3": 13.0885,
+      "Vphi_km_s": 10.435
+    }
+  }
+}

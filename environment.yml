@@ -1,0 +1,23 @@
+# Single environment for the earthcore engine project (core + magma analysis,
+# QHA manifest/post-processing). conda-forge only.
+#
+#   conda env create -f environment.yml
+#   conda activate earthcore-engine
+#
+# Note: the DFT campaign itself (qha_campaign/) runs on ASU Sol with site VASP/QE
+# modules, NOT from this env. phonopy is here for LOCAL force->DOS->F(V,T) post-
+# processing and the QHA fits. burnman is pinned <2-incompatible numpy by its own
+# requirement (it pulls numpy<2), which is expected.
+name: earthcore-engine
+channels: [conda-forge]
+dependencies:
+  - python=3.10
+  - numpy
+  - scipy
+  - pandas
+  - matplotlib
+  - phonopy
+  - ase            # structure I/O + scaling in qha_campaign/run_one.py
+  - qe             # Quantum ESPRESSO (pw.x) -- the DFT engine for the QHA campaign
+  - pip
+  - pip: [burnman>=2.1]
