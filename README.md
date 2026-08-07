@@ -38,4 +38,5 @@ The first-principles calculations were run on the Sol supercomputer at Arizona S
 
 ## License
 
-Apache-2.0. See [`LICENSE`](LICENSE).
+Code is licensed under the MIT License; data, result tables, and figures under CC BY 4.0.
+See [`LICENSE`](LICENSE).
