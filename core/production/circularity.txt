@@ -1,0 +1,10 @@
+=== TEST A: can an OXYGEN-FREE liquid satisfy the double constraint? ===
+  within the literature caps: none admissible; closest Si 2.1 S 1.8 C 0.9 wt%, rms 1.84%, fails ['lc_rho', 'li_rho', 'lc_v']
+  caps lifted:                47 admissible; needs S 1.9-3.9, C 0.5-2.7, Si 0.6-3.8 wt%
+
+=== TEST B: degrade the oxygen calibration (within the caps); is oxygen still required? ===
+  O potency 1.0: admissible  11, O 2.2-3.6 wt%, oxygen required True
+  O potency 0.7: admissible   5, O 1.6-2.6 wt%, oxygen required True
+  O potency 0.5: admissible   4, O 1.3-2.2 wt%, oxygen required True
+  O potency 0.3: admissible   3, O 1.3-1.9 wt%, oxygen required True
+  O potency 0.0: admissible   2, O 0.9-1.3 wt%, oxygen required False

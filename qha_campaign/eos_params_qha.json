@@ -131,10 +131,10 @@
         "V0_unit": "cm3/mol_formula",
         "K0_GPa": 291.0,
         "Kprime_0": 4.5,
-        "grueneisen_0": 1.7,
-        "q_0": 1.0,
-        "Debye_theta0_K": 417.0,
-        "source": "Mookherjee/Nakajima 2011"
+        "grueneisen_0": 2.57,
+        "q_0": 2.2,
+        "Debye_theta0_K": 920.0,
+        "source": "Mookherjee/Nakajima 2011 JGR 116 B04201 MGD (nonmagnetic K0; gamma0=2.57+/-0.05, q=2.2, theta0=920 K), verified vs Lai et al. 2018 Am. Mineral. 103, 1568"
       }
     }
   }

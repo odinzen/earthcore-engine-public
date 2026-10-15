@@ -1,0 +1,9 @@
+
+No iron thermal correction here, so compare the two ledgers with each other, not with Stage 1.
+oxygen    rho_lit  rho_own  lit vs PREM  own vs PREM  own vs lit
+    0 %    13.455   13.534        +5.4%        +6.0%      +0.59%
+    3 %    13.340   13.428        +4.5%        +5.2%      +0.66%
+    5 %    13.262   13.355        +3.9%        +4.6%      +0.70%
+    8 %    13.142   13.243        +3.0%        +3.8%      +0.77%
+
+The own-derived ledger shifts the aggregate density by the 'own vs lit' column; light elements lower it in both. Wrote eos_params_qha.json.

@@ -6,16 +6,16 @@ data only; the associated manuscripts are forthcoming.
 
 ## Layout
 
-- **`core/`** — the inner-core composition model. A multiphase iron-alloy aggregate (hexagonal iron
+- **`core/`**: the inner-core composition model. A multiphase iron-alloy aggregate (hexagonal iron
   with B2 FeSi, metallic FeO, the carbide Fe7C3, the sulfide Fe3S, and nickel) is built from a sourced
   Mie-Grueneisen-Debye equation-of-state ledger (`eos_params.json`), evaluated with BurnMan, and closed
   against the Preliminary Reference Earth Model (PREM) by a chemical-potential balance across the
-  inner-core boundary (`partition_params.json`). Solvers: `core_sweep_solver.py` (property matching),
-  `icb_partition_sweep.py` (the double-constraint search), `icb_partition_uq.py` (uncertainty),
-  `icb_partition_sensitivity.py`, `icb_velocity.py`, and `icb_circularity.py` (the circularity audit).
-  The `*.csv` files are the result tables; `reproduce.sh` regenerates them. `verify_qha_eos.py`
-  cross-checks the result on the first-principles equation of state.
-- **`qha_campaign/`** — the first-principles quasiharmonic equation-of-state campaign for the solid
+  inner-core boundary (`partition_params.json`). `core_sweep_solver.py` does the property matching;
+  `full_space_rerun.py --production` runs the four-element double-constraint search, the sensitivity
+  scenarios and the Monte Carlo, and writes `production/`. `production_checks.py`, `icb_circularity.py`,
+  `icb_velocity.py` and `verify_qha_eos.py` are the checks; `reproduce.sh` runs everything in order.
+  See `core/README.md` for the result and the file map.
+- **`qha_campaign/`**: the first-principles quasiharmonic equation-of-state campaign for the solid
   endmembers. Density functional theory (Quantum ESPRESSO, the PBE functional, projector augmented wave
   pseudopotentials) finite-displacement phonons give the Helmholtz free energy F(V,T) per phase.
   `dump_qha.py` exports the per-phase free-energy tables (`qha_*.json`); `fit_eos_qha.py` fits the
@@ -28,9 +28,8 @@ data only; the associated manuscripts are forthcoming.
 conda env create -f environment.yml
 conda activate earthcore-engine
 
-cd core && bash reproduce.sh          # composition sweep and data tables
-python ../qha_campaign/fit_eos_qha.py # first-principles equation of state fit + validation
-python verify_qha_eos.py              # cross-check the inner-core result on the calculated EoS
+cd core && bash reproduce.sh          # every result table and figure
+python ../qha_campaign/fit_eos_qha.py # first-principles equation of state fit
 ```
 
 The first-principles calculations were run on the Sol supercomputer at Arizona State University;

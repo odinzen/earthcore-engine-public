@@ -75,11 +75,22 @@ def _profile(xc, xsi, xo, x_ni):
 PREM_RHO = np.array([M.base.prem_inner_core(p)[0] for p in P_GPA])
 PREM_VPHI = np.array([M.base.prem_inner_core(p)[1] for p in P_GPA])
 
+MW = {"Fe": 55.845, "Ni": 58.693, "O": 15.999, "Si": 28.0855, "C": 12.011}
+
+
+def wt_pct(xc=0.0, xsi=0.0, xo=0.0, xni=X_NI):
+    """Mole fractions (iron the balance) to wt%; the model is defined on mole fractions."""
+    x = {"C": xc, "Si": xsi, "O": xo, "Ni": xni}
+    x["Fe"] = 1.0 - sum(x.values())
+    tot = sum(x[k] * MW[k] for k in x)
+    return {k: 100 * x[k] * MW[k] / tot for k in x}
+
+
 SERIES = [
-    ("FeNi", "Fe with 5 at% Ni", 0.0, 0.0, 0.0, X_NI),
-    ("C", "Fe Ni + 5 mol% C", 0.05, 0.0, 0.0, X_NI),
-    ("Si", "Fe Ni + 10 mol% Si", 0.0, 0.10, 0.0, X_NI),
-    ("O", "Fe Ni + 10 mol% O", 0.0, 0.0, 0.10, X_NI),
+    ("FeNi", f"Fe with {wt_pct()['Ni']:.1f} wt% Ni", 0.0, 0.0, 0.0, X_NI),
+    ("C", f"Fe Ni + {wt_pct(xc=0.05)['C']:.1f} wt% C", 0.05, 0.0, 0.0, X_NI),
+    ("Si", f"Fe Ni + {wt_pct(xsi=0.10)['Si']:.1f} wt% Si", 0.0, 0.10, 0.0, X_NI),
+    ("O", f"Fe Ni + {wt_pct(xo=0.10)['O']:.1f} wt% O", 0.0, 0.0, 0.10, X_NI),
 ]
 PROFILES = {key: _profile(xc, xsi, xo, xni)
             for key, _lbl, xc, xsi, xo, xni in SERIES}
@@ -99,10 +110,8 @@ def fig1_density():
     ax.set_ylabel("Density, g cm$^{-3}$", fontsize=10)
     _legend(ax, loc="upper left")
     ax.set_xlim(P_GPA.min(), P_GPA.max())
-    fig.suptitle("AGGREGATE DENSITY VERSUS PRESSURE", fontsize=13, fontweight="bold")
-    _source(fig)
     fig.tight_layout(rect=(0, 0.04, 1, 0.95))
-    fig.savefig(os.path.join(FIGDIR, "fig1_density_vs_P.png"), dpi=150)
+    fig.savefig(os.path.join(FIGDIR, "fig1_density_vs_P.png"), dpi=600, metadata={"Software": None})
     plt.close(fig)
 
 
@@ -119,11 +128,8 @@ def fig2_vphi():
     ax.set_ylabel("Bulk sound velocity, km s$^{-1}$", fontsize=10)
     _legend(ax, loc="upper left")
     ax.set_xlim(P_GPA.min(), P_GPA.max())
-    fig.suptitle("AGGREGATE BULK SOUND VELOCITY VERSUS PRESSURE",
-                 fontsize=13, fontweight="bold")
-    _source(fig)
     fig.tight_layout(rect=(0, 0.04, 1, 0.95))
-    fig.savefig(os.path.join(FIGDIR, "fig2_vphi_vs_P.png"), dpi=150)
+    fig.savefig(os.path.join(FIGDIR, "fig2_vphi_vs_P.png"), dpi=600, metadata={"Software": None})
     plt.close(fig)
 
 
@@ -162,9 +168,13 @@ def fig3_misfit_map():
     fig, (axA, axB) = plt.subplots(1, 2, figsize=(11.0, 5.0))
     greys = plt.get_cmap("Greys")
 
+    wa = [[wt_pct(xsi=x, xo=y) for x, y in zip(rx, ry)] for rx, ry in zip(Xa, Ya)]
+    wb = [[wt_pct(xc=x, xo=y) for x, y in zip(rx, ry)] for rx, ry in zip(Xb, Yb)]
+    XaW = np.array([[w["Si"] for w in r] for r in wa]); YaW = np.array([[w["O"] for w in r] for r in wa])
+    XbW = np.array([[w["C"] for w in r] for r in wb]); YbW = np.array([[w["O"] for w in r] for r in wb])
     for ax, (X, Y, Z), xlab, header in (
-        (axA, (Xa * 100, Ya * 100, Za), "X Si, mol%", "PANEL A  SILICON OXYGEN PLANE"),
-        (axB, (Xb * 100, Yb * 100, Zb), "X C, mol%", "PANEL B  CARBON OXYGEN PLANE"),
+        (axA, (XaW, YaW, Za), "Silicon, wt%", "(a)"),
+        (axB, (XbW, YbW, Zb), "Carbon, wt%", "(b)"),
     ):
         zmin = np.nanmin(Z)
         zmax = np.nanmax(Z)
@@ -175,21 +185,20 @@ def fig3_misfit_map():
         if zmin < 0.0 < zmax:
             zc = ax.contour(X, Y, Z, levels=[0.0], colors="black", linewidths=2.2)
             ax.clabel(zc, inline=True, fontsize=8, fmt="%.0f")
+        ax.set_xlim(0.0, np.nanmin(X[:, -1]))   # mole-fraction grid mapped to wt%: crop to full coverage
+        ax.set_ylim(0.0, np.nanmin(Y[-1, :]))
         _box(ax)
         ax.set_xlabel(xlab, fontsize=10)
-        ax.set_ylabel("X O, mol%", fontsize=10)
-        ax.set_title(header, fontsize=10, fontweight="bold")
+        ax.set_ylabel("Oxygen, wt%", fontsize=10)
+        ax.set_title(header, loc="left", fontsize=10, fontweight="bold")
         cb = fig.colorbar(cf, ax=ax, fraction=0.046, pad=0.04)
         cb.outline.set_edgecolor("black")
         cb.outline.set_linewidth(0.8)
         cb.ax.tick_params(width=0.6, color="black", labelsize=8)
         cb.set_label("Density misfit vs PREM, %", fontsize=9)
 
-    fig.suptitle("DENSITY MISFIT MAP AT 330 GPa, 6000 K, 5 at% NICKEL",
-                 fontsize=13, fontweight="bold")
-    _source(fig)
     fig.tight_layout(rect=(0, 0.05, 1, 0.94))
-    fig.savefig(os.path.join(FIGDIR, "fig3_misfit_map.png"), dpi=150)
+    fig.savefig(os.path.join(FIGDIR, "fig3_misfit_map.png"), dpi=600, metadata={"Software": None})
     plt.close(fig)
 
 
@@ -208,23 +217,21 @@ def fig4_carbon_arm():
 
     fig, ax = plt.subplots(figsize=(7.2, 5.0))
     ax.axhline(0.0, color="black", lw=0.9, ls=(0, (4, 3)), zorder=1)
-    l1, = ax.plot(xc * 100, drho, color="0.20", lw=1.8, ls="-",
+    cw = np.array([wt_pct(xc=c)["C"] for c in xc])
+    l1, = ax.plot(cw, drho, color="0.20", lw=1.8, ls="-",
                   label="Density misfit")
-    l2, = ax.plot(xc * 100, dvphi, color="0.50", lw=1.8, ls="--",
+    l2, = ax.plot(cw, dvphi, color="0.50", lw=1.8, ls="--",
                   label="Bulk sound velocity misfit")
     # diagonal hatching fill between curve and zero to distinguish series
-    ax.fill_between(xc * 100, drho, 0.0, facecolor="none", edgecolor="0.20",
+    ax.fill_between(cw, drho, 0.0, facecolor="none", edgecolor="0.20",
                     hatch="////", linewidth=0.0, alpha=0.6, zorder=0)
     _box(ax)
-    ax.set_xlabel("X C, mol%", fontsize=10)
+    ax.set_xlabel("Carbon, wt%", fontsize=10)
     ax.set_ylabel("Misfit vs PREM, %", fontsize=10)
-    ax.set_xlim(0.0, 5.0)
+    ax.set_xlim(0.0, cw[-1])
     _legend(ax, loc="best")
-    fig.suptitle("CARBON ARM MISFIT AT 330 GPa, 6000 K, 5 at% NICKEL",
-                 fontsize=13, fontweight="bold")
-    _source(fig)
     fig.tight_layout(rect=(0, 0.04, 1, 0.95))
-    fig.savefig(os.path.join(FIGDIR, "fig4_carbon_arm.png"), dpi=150)
+    fig.savefig(os.path.join(FIGDIR, "fig4_carbon_arm.png"), dpi=600, metadata={"Software": None})
     plt.close(fig)
 
 

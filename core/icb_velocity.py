@@ -35,7 +35,9 @@ if __name__ == "__main__":
     print(f"PREM IC: Vp={prem['Vp_km_s']} Vs={prem['Vs_km_s']} Poisson={prem['poisson']}")
     import csv
     rows = []
-    for tag, (c, si, o, s) in {"pure Fe Ni": (0,0,0,0), "best fit solid": (0.0,0.0,0.0034,0.011)}.items():
+    import json
+    sol = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "production", "best_fit.json")))["solid_x"]
+    for tag, (c, si, o, s) in {"pure Fe Ni": (0,0,0,0), "best fit solid": (sol["C"], sol["Si"], sol["O"], sol["S"])}.items():
         r = vp_vs(c, si, o, s)
         print(f"{tag}: Vp={r['vp']:.2f}({100*(r['vp']-prem['Vp_km_s'])/prem['Vp_km_s']:+.1f}%) Vphi={r['vphi']:.2f} Vs={r['vs']:.2f}({100*(r['vs']-prem['Vs_km_s'])/prem['Vs_km_s']:+.1f}%) Poisson={r['poisson']:.3f}")
         r["case"] = tag; rows.append(r)

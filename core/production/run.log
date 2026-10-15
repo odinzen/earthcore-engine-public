@@ -1,0 +1,31 @@
+[      0 s] caps {'C': 1.0, 'Si': 2.4, 'S': 1.9}; start, 8 workers, grids main={'O': 21, 'Si': 5, 'S': 7, 'C': 5} uq={'O': 21, 'Si': 5, 'S': 7, 'C': 5}, draws=400
+[      4 s] sweep T_ICB_5500K: 4 admissible, oxygen_required=True
+[      4 s] sweep baseline_5800K: 11 admissible, oxygen_required=True
+[      4 s] sweep T_ICB_6200K: 35 admissible, oxygen_required=True
+[      4 s] sweep T_ICB_6000K: 19 admissible, oxygen_required=True
+[      4 s] sweep T_ICB_5700K: 11 admissible, oxygen_required=True
+[      4 s] sweep D_Si_0.67: 4 admissible, oxygen_required=True
+[      4 s] sweep D_Si_1.00: 35 admissible, oxygen_required=True
+[      7 s] sweep B1_oxide: 11 admissible
+[      7 s] wrote best_fit.json
+[     13 s] monte carlo 20/400
+[     13 s] monte carlo 40/400
+[     14 s] monte carlo 60/400
+[     14 s] monte carlo 80/400
+[     15 s] monte carlo 100/400
+[     16 s] monte carlo 120/400
+[     16 s] monte carlo 140/400
+[     17 s] monte carlo 160/400
+[     17 s] monte carlo 180/400
+[     18 s] monte carlo 200/400
+[     19 s] monte carlo 220/400
+[     19 s] monte carlo 240/400
+[     20 s] monte carlo 260/400
+[     20 s] monte carlo 280/400
+[     21 s] monte carlo 300/400
+[     22 s] monte carlo 320/400
+[     22 s] monte carlo 340/400
+[     23 s] monte carlo 360/400
+[     24 s] monte carlo 380/400
+[     24 s] monte carlo 400/400
+[     24 s] done: {"n_draws": 400, "frac_admissible": 0.495, "frac_oxygen_required": 0.9040404040404041, "best_o_pctl": [8.0, 11.0, 13.0], "best_c_pctl": [4.0, 4.0, 4.0], "best_si_pctl": [1.0, 2.0, 4.0], "best_s_pctl": [1.0, 2.0, 2.5], "sol_s_pctl": [0.703627693348844, 1.5343951410227732, 1.9264025960081028], "jump_pctl": [5.749089547655741, 6.474264798668877, 7.1482776343141685]}

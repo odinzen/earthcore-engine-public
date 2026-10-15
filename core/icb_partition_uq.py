@@ -246,7 +246,7 @@ def make_fig(adm, o_mol, jump, out_csv):
     axA.axvline(o_mol[1], color="0.35", linewidth=1.0, linestyle="--",
                 label="16th to 84th")
     axA.axvline(o_mol[2], color="0.35", linewidth=1.0, linestyle="--")
-    axA.set_title("PANEL A", fontsize=10, fontweight="bold")
+    axA.set_title("(a)", fontsize=10, fontweight="bold")
     axA.set_xlabel("BEST FIT OUTER CORE O, mol percent")
     axA.set_ylabel("NUMBER OF DRAWS, count")
     leg = axA.legend(fontsize=8, frameon=True)
@@ -261,7 +261,7 @@ def make_fig(adm, o_mol, jump, out_csv):
     axB.axvspan(4.5, 4.8, color="0.85", alpha=1.0, zorder=0,
                 label="observed 4.5 to 4.8")
     axB.axvline(jump[0], color="black", linewidth=1.6, label="median")
-    axB.set_title("PANEL B", fontsize=10, fontweight="bold")
+    axB.set_title("(b)", fontsize=10, fontweight="bold")
     axB.set_xlabel("ICB DENSITY JUMP, percent")
     axB.set_ylabel("NUMBER OF DRAWS, count")
     leg = axB.legend(fontsize=8, frameon=True)
@@ -269,13 +269,9 @@ def make_fig(adm, o_mol, jump, out_csv):
     leg.get_frame().set_linewidth(0.8)
     style_axes(axB)
 
-    fig.suptitle("MONTE CARLO UNCERTAINTY OF THE ICB PARTITION DOUBLE CONSTRAINT",
-                 fontsize=12, fontweight="bold")
-    fig.text(0.5, 0.005, SOURCE_NOTE, ha="center", va="bottom", fontsize=7,
-             color="black")
     fig.tight_layout(rect=[0, 0.045, 1, 0.95])
     out_png = os.path.join(os.path.dirname(out_csv), "fig9_uq.png")
-    fig.savefig(out_png, dpi=150, facecolor="white")
+    fig.savefig(out_png, dpi=600, facecolor="white")
     plt.close(fig)
     print(f"Wrote {out_png}")
 

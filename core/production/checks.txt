@@ -1,0 +1,5 @@
+D_C 1.5: 11 admissible of 3085; O 2.2-3.6 wt%; oxygen required True; best O 2.6 Si 2.3 S 1.6 C 1.0 wt%, rms 0.94, jump 7.23
+D_C 1: 0 admissible of 3085
+D_C 2: 45 admissible of 3085; O 2.2-4.7 wt%; oxygen required True; best O 2.9 Si 1.7 S 1.6 C 1.0 wt%, rms 0.70, jump 6.70
+D_C 6.3e-05: 0 admissible of 3085
+Xie 2025 oxygen component: 3 admissible of 3085; O 1.9-2.6 wt%; oxygen required True; best O 2.3 Si 2.3 S 1.6 C 1.0 wt%, rms 1.12, jump 7.04

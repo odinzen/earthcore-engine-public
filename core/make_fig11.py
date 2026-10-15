@@ -39,7 +39,9 @@ def box(ax):
 
 
 def main():
-    r = V.vp_vs(0.0, 0.0, 0.0034, 0.011)   # x_c, x_si, x_o, x_s
+    import json
+    sol = json.load(open(os.path.join(HERE, "production", "best_fit.json")))["solid_x"]
+    r = V.vp_vs(sol["C"], sol["Si"], sol["O"], sol["S"])
     prem = V.SC["PREM_inner_core"]
     prem_vphi = 10.26
 
@@ -60,12 +62,8 @@ def main():
     axA.set_xticklabels(labels)
     axA.set_ylabel("Velocity, km s$^{-1}$")
     axA.set_xlabel("Wave mode")
-    axA.set_title("A  AGGREGATE VELOCITIES", loc="left", fontweight="bold",
+    axA.set_title("(a)", loc="left", fontweight="bold",
                   fontsize=9)
-    # annotate the Vs overshoot
-    dvs = 100.0 * (r["vs"] - prem["Vs_km_s"]) / prem["Vs_km_s"]
-    axA.text(2, max(model[2], premv[2]) + 0.4, "Vs %+.0f %%" % dvs,
-             ha="center", va="bottom", fontsize=8, color="black")
     axA.set_ylim(0, 13)
     leg = axA.legend(frameon=True, fontsize=8, loc="upper right")
     leg.get_frame().set_edgecolor("black")
@@ -84,20 +82,16 @@ def main():
     axB.set_ylabel("Poisson ratio")
     axB.set_xlabel("Reservoir")
     axB.set_ylim(0, 0.5)
-    axB.set_title("B  POISSON RATIO", loc="left", fontweight="bold",
+    axB.set_title("(b)", loc="left", fontweight="bold",
                   fontsize=9)
     for i, v in enumerate(pv):
         axB.text(i, v + 0.01, "%.2f" % v, ha="center", va="bottom",
                  fontsize=8, color="black")
     box(axB)
 
-    fig.suptitle("Shear anomaly of the inner core solid",
-                 fontweight="bold", fontsize=12)
     fig.tight_layout(rect=(0, 0.05, 1, 0.95))
-    fig.text(0.5, 0.012, SOURCE, ha="center", va="bottom", fontsize=7,
-             color="black", wrap=True)
     out = os.path.join(FIGDIR, "fig11_vp_vs_poisson.png")
-    fig.savefig(out, dpi=200)
+    fig.savefig(out, dpi=600, metadata={"Software": None})
     plt.close(fig)
     print("wrote", out)
     print("model vp=%.2f vphi=%.2f vs=%.2f poisson=%.2f" %

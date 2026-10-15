@@ -1,0 +1,44 @@
+{
+ "_README": "Minimum-rms admissible liquid of production/sweep_baseline_5800K.csv (written by full_space_rerun.py --production). Mole fractions; nickel 0.05 in both reservoirs.",
+ "caps_wt_pct": {
+  "C": 1.0,
+  "Si": 2.4,
+  "S": 1.9
+ },
+ "liquid_x": {
+  "O": 0.08,
+  "Si": 0.04,
+  "S": 0.025,
+  "C": 0.04
+ },
+ "solid_x": {
+  "O": 0.0016,
+  "Si": 0.032,
+  "S": 0.01875,
+  "C": 0.06
+ },
+ "liquid_wt_pct": {
+  "O": 2.594010642796494,
+  "Si": 2.276832486663571,
+  "S": 1.6243980328468892,
+  "C": 0.9737065388658257
+ },
+ "solid_wt_pct": {
+  "O": 0.049266220718748574,
+  "Si": 1.7296911581929035,
+  "S": 1.1569143747092685,
+  "C": 1.3869692880482118
+ },
+ "misfit_pct": {
+  "lc_rho": 0.211464391139468,
+  "li_rho": -0.9519826177752748,
+  "lc_v": -1.0595805346109493,
+  "li_v": 1.0472269295405947,
+  "s_rho": 1.2290793518239076,
+  "s_v": -0.8073241751746681
+ },
+ "rms_misfit_pct": 0.9427611593478163,
+ "icb_jump_pct": 7.225599651340934,
+ "n_admissible": 11,
+ "n_tested": 3085
+}

@@ -24,7 +24,7 @@ NA = 6.02214076e23
 CELL_TO_CM3MOL = NA / 1e24
 UNITS_PER_CELL = {"hcp_Fe": 2, "B2_FeSi": 1, "B1_FeO": 1, "Fe7C3": 2}   # ledger units per QHA cell
 KEYS = {"hcp_fe": "hcp_Fe", "fesi": "B2_FeSi", "feo": "B1_FeO", "fe7c3": "Fe7C3"}
-P_ICB, T_ICB, PREM_RHO = 328.85e9, 6000.0, 13.0885
+P_ICB, T_ICB, PREM_RHO = 328.85e9, 6000.0, 12.7636   # PREM inner core at the ICB (13.0885 is the centre)
 
 
 def mineral(block):
@@ -85,16 +85,17 @@ def main():
 
     print(f"Inner core at the ICB ({P_ICB/1e9:.1f} GPa, {T_ICB:.0f} K), FeO = B1, MGD base.")
     print(f"PREM density at the top of the inner core: {PREM_RHO:.3f} g/cm3\n")
-    print(f"{'oxygen':8s} {'rho_lit':>8s} {'rho_own':>8s} {'lit vs PREM':>12s} {'own vs PREM':>12s}")
+    print("No iron thermal correction here, so compare the two ledgers with each other, not with Stage 1.")
+    print(f"{'oxygen':8s} {'rho_lit':>8s} {'rho_own':>8s} {'lit vs PREM':>12s} {'own vs PREM':>12s} {'own vs lit':>11s}")
     for xo in (0.0, 0.03, 0.05, 0.08):
         n_hcp = 1.0 - 2.0 * xo
         amt = {"hcp_fe": n_hcp, "feo": xo, "fesi": 0.0, "fe7c3": 0.0}
         rl = aggregate_density(lit_phases, amt)
         ro = aggregate_density(own_phases, amt)
         print(f"{xo*100:5.0f} %  {rl:8.3f} {ro:8.3f} {100*(rl-PREM_RHO)/PREM_RHO:+11.1f}% "
-              f"{100*(ro-PREM_RHO)/PREM_RHO:+11.1f}%")
-    print("\nBoth EoS: pure iron is too dense and oxygen is required to reach PREM. The oxygen-rich "
-          "result is robust to swapping in our own first-principles EoS. Wrote eos_params_qha.json.")
+              f"{100*(ro-PREM_RHO)/PREM_RHO:+11.1f}% {100*(ro-rl)/rl:+10.2f}%")
+    print("\nThe own-derived ledger shifts the aggregate density by the 'own vs lit' column; light "
+          "elements lower it in both. Wrote eos_params_qha.json.")
 
 
 if __name__ == "__main__":

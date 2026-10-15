@@ -100,6 +100,6 @@ _box(axR)
 axR.legend(loc="lower right", frameon=True, edgecolor="black", ncol=1)
 
 fig.tight_layout()
-fig.savefig(os.path.join(FIGDIR, "fig12_qha_benchmark.png"), dpi=600, bbox_inches="tight")
-fig.savefig(os.path.join(FIGDIR, "fig12_qha_benchmark.pdf"), bbox_inches="tight")
+fig.savefig(os.path.join(FIGDIR, "fig12_qha_benchmark.png"), dpi=600, bbox_inches="tight", metadata={"Software": None})
+fig.savefig(os.path.join(FIGDIR, "fig12_qha_benchmark.pdf"), bbox_inches="tight", metadata={"Creator": None, "Producer": None})
 print("wrote fig12_qha_benchmark.{png,pdf}")
