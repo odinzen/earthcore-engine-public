@@ -1,0 +1,47 @@
+cff-version: 1.2.0
+message: "If you use this package, please cite it as below, together with BurnMan."
+title: "earthcore-engine: a partition-closed light-element model of Earth's core"
+type: software
+version: 1.0.0
+license:
+  - MIT
+  - CC-BY-4.0
+repository-code: "https://github.com/odinzen/earthcore-engine-public"
+authors:
+  - family-names: Bustamante
+    given-names: Michael E.
+    orcid: "https://orcid.org/0009-0009-9001-8151"
+    affiliation: "Odinzen LLC, Houston, TX, United States"
+keywords:
+  - Earth's core
+  - light elements
+  - inner core boundary
+  - equation of state
+  - element partitioning
+  - PREM
+  - quasiharmonic approximation
+  - mineral physics
+references:
+  - type: article
+    title: "BurnMan – a Python toolkit for planetary geophysics, geochemistry and thermodynamics"
+    authors:
+      - family-names: Myhill
+        given-names: Robert
+      - family-names: Cottaar
+        given-names: Sanne
+      - family-names: Heister
+        given-names: Timo
+      - family-names: Rose
+        given-names: Ian
+      - family-names: Unterborn
+        given-names: Cayman
+      - family-names: Dannberg
+        given-names: Juliane
+      - family-names: Gassmoeller
+        given-names: Rene
+    journal: "Journal of Open Source Software"
+    year: 2023
+    volume: 8
+    issue: 87
+    start: 5389
+    doi: 10.21105/joss.05389
