@@ -19,5 +19,6 @@ dependencies:
   - phonopy
   - ase            # structure I/O + scaling in qha_campaign/run_one.py
   - qe             # Quantum ESPRESSO (pw.x) -- the DFT engine for the QHA campaign
+  - jupyterlab     # core/walkthrough.ipynb
   - pip
   - pip: [burnman>=2.1, pymupdf]   # pymupdf only for digitize_badro_fig1.py

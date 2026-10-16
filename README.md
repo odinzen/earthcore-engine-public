@@ -14,7 +14,8 @@ data only; the associated manuscripts are forthcoming.
   `full_space_rerun.py --production` runs the four-element double-constraint search, the sensitivity
   scenarios and the Monte Carlo, and writes `production/`. `production_checks.py`, `icb_circularity.py`,
   `icb_velocity.py` and `verify_qha_eos.py` are the checks; `reproduce.sh` runs everything in order.
-  See `core/README.md` for the result and the file map.
+  See `core/README.md` for the result and the file map, and `core/walkthrough.ipynb` for a
+  one-minute tour that recomputes the best fit and reruns the baseline search.
 - **`qha_campaign/`**: the first-principles quasiharmonic equation-of-state campaign for the solid
   endmembers. Density functional theory (Quantum ESPRESSO, the PBE functional, projector augmented wave
   pseudopotentials) finite-displacement phonons give the Helmholtz free energy F(V,T) per phase.
